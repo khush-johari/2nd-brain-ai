@@ -10,3 +10,6 @@ class NoteCreate(BaseModel):
 # This defines what a Note looks like when we read it from our DB
 class Note(NoteCreate):
     id: int
+
+class ChatRequest(BaseModel):
+    query: str
