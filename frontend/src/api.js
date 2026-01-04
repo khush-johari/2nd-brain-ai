@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 1. Pointing to running Python server
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://twond-brain-ai.onrender.com";
 
 // 2. Function to Get All Notes
 //async tells server to wait for server as it takes time and not freeze
