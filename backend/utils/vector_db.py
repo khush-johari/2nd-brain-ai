@@ -1,11 +1,11 @@
 import os
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
 # 1. Setup the Embedding Model
 # We are using 'all-MiniLM-L6-v2' (Small, Fast, Free)
-embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+embedding_model = FastEmbedEmbeddings()
 
 # 2. Setup ChromaDB (The Database)
 PERSIST_DIRECTORY = "./chroma_db"
