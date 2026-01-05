@@ -58,3 +58,27 @@ Follow these steps to run the project on your machine.
 git clone [https://github.com/khush-johari/2nd-brain-ai.git](https://github.com/khush-johari/2nd-brain-ai.git)
 cd 2nd-brain-ai
 ```
+
+---
+
+## 🚀 Deployment
+
+- \*\*Frontend: Hosted on Vercel.
+- \*\*Backend: Hosted on Render.
+- \*\*CI/CD: Automatic deployments via GitHub.
+
+---
+
+##🔮 Future Roadmap (v2.0)
+
+- **📝 PDF Upload:** Support for uploading and chatting with PDF documents.
+- **🔍 User Authentication** Login system (Google/GitHub) for multi-user support.
+- **🎙️ Voice Notes** Speech-to-text integration for easier note-taking.
+
+---
+
+##👨‍💻 Author
+
+- Khushvardhan Johari Aspiring Tech & Management Professional | Full Stack AI Developer
+
+Made with ❤️ and ☕
