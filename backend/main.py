@@ -18,10 +18,10 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,#allows all the origins given in origins list
-    allow_credentials=True,#allows the frontend to send Cookies or Authentication Headers
-    allow_methods=["*"],#allowing React do whatever it wants (Read, Write, Delete).
-    allow_headers=["*"],#Accept any extra information they want to send us
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allow all headers
 )
 
 # File path for our temporary database
