@@ -17,7 +17,7 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 origins = [
     "http://localhost:5173",    # Local React
     "http://127.0.0.1:5173",    # Local React Alternative
-    FRONTEND_URL,               # Live Vercel URL
+    "https://2nd-brain-ai.vercel.app", # Live Vercel URL
 ]
 
 app.add_middleware(
