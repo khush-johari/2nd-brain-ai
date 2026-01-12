@@ -29,6 +29,7 @@ function App() {
     setContent("");
   };
 
+  // --- THIS IS THE FIXED FUNCTION ---
   const handleSearch = async () => {
     if (!searchQuery) {
       loadNotes();
@@ -44,7 +45,9 @@ function App() {
 
       // 2. Fetch AI Answer
       const aiResult = await askAI(searchQuery);
-      setAnswer(aiResult);
+
+      // ✅ FIX: Extract just the string '.answer' from the object
+      setAnswer(aiResult.answer);
     } catch (err) {
       console.error(err);
       setAnswer("Failed to get response from AI.");
@@ -185,9 +188,9 @@ function App() {
           {/* LEFT: Upload Section */}
           <div className="space-y-4 h-full flex flex-col">
             <h3 className="text-xl font-semibold text-gray-300 flex items-center gap-2">
-              Add Source Material
+              <span className="text-purple-400">⚡</span> Add Source Material
             </h3>
-            {/* Glass Uploader Component*/}
+            {/* Glass Uploader Component */}
             <div className="flex-1">
               <PDFUploader onUploadSuccess={handleUploadSuccess} />
             </div>
@@ -196,7 +199,7 @@ function App() {
           {/* RIGHT: Quick Note Section */}
           <div className="space-y-4 h-full flex flex-col">
             <h3 className="text-xl font-semibold text-gray-300 flex items-center gap-2">
-              Quick Memory
+              <span className="text-green-400">✍️</span> Quick Memory
             </h3>
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl space-y-4 hover:border-white/20 transition-colors flex-1 flex flex-col">
               <input

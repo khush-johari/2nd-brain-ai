@@ -46,7 +46,7 @@ export const searchNotes = async (query) => {
 export const askAI = async (query) => {
   try {
     const response = await api.post("/ask", { query });
-    return response.data; // Now returns object { answer: "...", sources: [...] }
+    return response.data; // Returns object { answer: "...", sources: [...] }
   } catch (error) {
     console.error("Error asking AI:", error);
     return { 
