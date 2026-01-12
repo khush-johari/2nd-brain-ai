@@ -10,7 +10,7 @@ api_key = os.getenv("GROQ_API_KEY")
 if not api_key:
     raise ValueError("GROQ_API_KEY is missing! Check your .env file.")
 
-# 2. Initialized the Model(Using Llama3-8b because it's fast and free, temperature is we want ai to give precise answers not be creative)
+# 2. Initialized the Model(Using Llama3-8b because it's fast and free, temperature is 0 as we want ai to give precise answers not be creative)
 llm = ChatGroq(
     temperature=0, 
     model_name="llama-3.3-70b-versatile", 
@@ -52,14 +52,19 @@ def chat_with_ai(query: str):
 
 def get_rag_response(query: str, context: str):
     """
-    1. query: The user's question (e.g., "How do I use useEffect?")
-    2. context: The text found in your notes (e.g., "useEffect is for side effects...")
+    1. query: The user's question.
+    2. context: The text found in notes.
     """
     
-    # Define the "System Personality"
-    system_prompt = """You are a helpful Second Brain assistant. 
-    Answer the user's question based ONLY on the following context. 
-    If the answer is not in the context, say 'I don't have that in my memory yet.'
+    system_prompt = """You are an intelligent Second Brain assistant. 
+    Use the provided context to answer the user's question comprehensively and clearly.
+
+    STRICT FORMATTING RULES:
+    1. **Structure:** Do NOT just dump text. Use logical paragraphs.
+    2. **Visuals:** Use **Bold** for key terms and headers.
+    3. **Lists:** Use Bullet points or Numbered lists for steps, features, or schedules.
+    4. **Synthesis:** Do not strictly copy-paste. Read the context, understand it, and write a natural answer.
+    5. **Honesty:** If the answer is not in the context below, strictly say: 'I don't have that in my memory yet.'
     
     Context:
     {context}

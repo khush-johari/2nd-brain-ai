@@ -1,32 +1,80 @@
 import axios from "axios";
 
-// 1. Pointing to running Python server
-const API_URL = "https://twond-brain-ai.onrender.com";
+// 1. Dynamic Base URL
+// VITE_API_URL should be set in Vercel/Netlify Environment Variables.
+// If it's missing, it falls back to localhost for development.
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
-// 2. Function to Get All Notes
-//async tells server to wait for server as it takes time and not freeze
+console.log(`Connecting to Brain at: ${API_BASE_URL}`);
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
+// --- API FUNCTIONS ---
+
 export const fetchNotes = async () => {
-  const response = await axios.get(`${API_URL}/notes`);
-  return response.data;
+  try {
+    const response = await api.get("/notes");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching notes:", error);
+    return [];
+  }
 };
 
-// 3. Function to Add a Note
-// await pauses only this function until the server replies.
 export const createNote = async (note) => {
-  const response = await axios.post(`${API_URL}/notes`, note);
-  return response.data;
+  try {
+    const response = await api.post("/notes", note);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating note:", error);
+    throw error;
+  }
 };
 
-// 4. Function to Search Notes (The AI Part)
 export const searchNotes = async (query) => {
-  const response = await axios.get(`${API_URL}/search`, {
-    params: { query: query }
-  });
-  return response.data;
+  try {
+    const response = await api.get(`/search`, { params: { query } });
+    return response.data;
+  } catch (error) {
+    console.error("Error searching notes:", error);
+    return [];
+  }
 };
 
-// 5. Function to Chat with AI (RAG)
 export const askAI = async (query) => {
-  const response = await axios.post(`${API_URL}/chat`, { query: query });
-  return response.data.response;
+  try {
+    const response = await api.post("/ask", { query });
+    return response.data; // Now returns object { answer: "...", sources: [...] }
+  } catch (error) {
+    console.error("Error asking AI:", error);
+    return { 
+        answer: "I'm sorry, I couldn't reach the brain. (Check Server Connection)", 
+        sources: [] 
+    };
+  }
+};
+
+export const uploadPDF = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    // Using fetch to avoid axios multipart header issues
+    const response = await fetch(`${API_BASE_URL}/upload-pdf`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || "Upload failed");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Upload Error:", error);
+    throw error;
+  }
 };

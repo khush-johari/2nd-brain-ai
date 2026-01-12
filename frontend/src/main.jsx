@@ -1,13 +1,10 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { NoteProvider } from "./context/NoteContext.jsx";
-import "./index.css";
-import App from "./App.jsx";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css"; // This imports the Tailwind & Deep Space styles
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <NoteProvider>
-      <App />
-    </NoteProvider>
-  </StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
